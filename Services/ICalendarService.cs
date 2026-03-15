@@ -1,4 +1,5 @@
-﻿using System;
+using DeskAppWPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace DeskAppWPF.Services
 {
     internal interface ICalendarService
     {
-        // Should expose the GetUpcomingEvents or something similar so we can power a calendar view
+        Task<IEnumerable<UpcomingEvent>> GetUpcomingEventsAsync(string icsUrl);
     }
 }

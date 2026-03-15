@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,20">
@@ -37,7 +38,11 @@
             <TextBox Text="{Binding BufferZoneMinutes, UpdateSourceTrigger=PropertyChanged}" Padding="5"/>
         </StackPanel>
 
-        <Button Grid.Row="4" Content="Save Settings" Command="{Binding SaveCommand}" 
+        <StackPanel Grid.Row="4" Margin="0,0,0,20">
+            <CheckBox Content="Run automation even when PC is locked" IsChecked="{Binding RunWhenPcLocked, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold"/>
+        </StackPanel>
+
+        <Button Grid.Row="5" Content="Save Settings" Command="{Binding SaveCommand}" 
                 HorizontalAlignment="Left" Padding="15,5" Background="#007ACC" Foreground="White" BorderBrush="Transparent"/>
     </Grid>
 </UserControl>

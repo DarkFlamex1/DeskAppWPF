@@ -3,6 +3,8 @@ using System.Data;
 using System.Windows;
 using DeskAppWPF.Services;
 using DeskAppWPF.ViewModels;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DeskAppWPF
 {
@@ -11,38 +13,45 @@ namespace DeskAppWPF
     /// </summary>
     public partial class App : Application
     {
+        private readonly IHost _host;
+
+        public App()
+        {
+            _host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddSingleton<IDeskService, MockDeskService>();
+                    services.AddSingleton<ISettingsService, SettingsService>();
+                    services.AddSingleton<ICalendarService, CalendarService>();
+                    services.AddHostedService<DeskAutomationService>();
+                    
+                    // ViewModels
+                    services.AddTransient<MainWindowViewModel>();
+                    
+                    // Views
+                    services.AddTransient<MainWindow>(provider => new MainWindow
+                    {
+                        DataContext = provider.GetRequiredService<MainWindowViewModel>()
+                    });
+                })
+                .Build();
+        }
+
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
  
-            // ── 1. Build services ─────────────────────────────────────────────────
-            //
-            // Swap MockDeskService ↔ DeskService by changing one line here.
-            // Nothing else in the codebase needs to change.
-            //
-            IDeskService deskService = new MockDeskService();
-    
-            // Sprint 2: replace with real services:
-            // IDeskService deskService = new DeskService(baseUrl: "http://192.168.1.x");
-            // ICalendarService calendarService = new CalendarService(icsUrl: "...");
-    
-            // ── 1.5 Build the Settings Service ─────────────────────────────────────
-            ISettingsService settingsService = new SettingsService();
+            await _host.StartAsync();
 
-            // ── 2. Build the shell ViewModel ─────────────────────────────────────
-            var mainVm = new MainWindowViewModel(deskService, settingsService);
-    
-            // ── 3. Build and show the window ─────────────────────────────────────
-            var window = new MainWindow
-            {
-                DataContext = mainVm
-            };
-            window.Show();
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+        }
 
-            // ── 4. Run startup logic (picks first page) ──────────────────────────
-            //await mainVm.InitializeAsync();
-            await Task.Delay(1);
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            await _host.StopAsync();
+            _host.Dispose();
+            base.OnExit(e);
         }
     }
-
 }

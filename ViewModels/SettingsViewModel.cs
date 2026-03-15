@@ -31,6 +31,9 @@ namespace DeskAppWPF.ViewModels
         [ObservableProperty]
         private int _bufferZoneMinutes = 15;
 
+        [ObservableProperty]
+        private bool _runWhenPcLocked = false;
+
         public SettingsViewModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
@@ -43,6 +46,7 @@ namespace DeskAppWPF.ViewModels
             IcsLink = settings.IcsLink;
             DeskIpAddress = settings.DeskIpAddress;
             BufferZoneMinutes = settings.BufferZoneMinutes;
+            RunWhenPcLocked = settings.RunWhenPcLocked;
         }
 
         [RelayCommand]
@@ -52,7 +56,8 @@ namespace DeskAppWPF.ViewModels
             {
                 IcsLink = this.IcsLink,
                 DeskIpAddress = this.DeskIpAddress,
-                BufferZoneMinutes = this.BufferZoneMinutes
+                BufferZoneMinutes = this.BufferZoneMinutes,
+                RunWhenPcLocked = this.RunWhenPcLocked
             };
             
             _settingsService.Save(settings);

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
 using DeskAppWPF.Messages;
+using CommunityToolkit.Mvvm.Input;
 
 namespace DeskAppWPF.ViewModels
 {

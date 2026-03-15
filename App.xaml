@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:DeskAppWPF"
              ThemeMode="Dark"
              xmlns:vm="clr-namespace:DeskAppWPF.ViewModels"
-             xmlns:views="clr-namespace:DeskAppWPF.Views">
+             xmlns:views="clr-namespace:DeskAppWPF.Views"
+             ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type vm:DeskControlViewModel}">

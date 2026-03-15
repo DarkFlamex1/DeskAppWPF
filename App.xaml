@@ -10,16 +10,17 @@
             <DataTemplate DataType="{x:Type vm:DeskControlViewModel}">
                 <views:DeskControlView />
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
+            
             <!-- Sprint 2 — uncomment as each screen is built -->
             <!--
             <DataTemplate DataType="{x:Type vm:CalendarViewModel}">
                 <views:CalendarView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
-                <views:SettingsView />
-            </DataTemplate>
+            
 
             <DataTemplate DataType="{x:Type vm:ConnectionViewModel}">
                 <views:ConnectionView />

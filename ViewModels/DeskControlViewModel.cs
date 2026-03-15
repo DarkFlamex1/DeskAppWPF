@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DeskAppWPF.Services;
 using System;
@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Messaging;
+using DeskAppWPF.Messages;
 
 namespace DeskAppWPF.ViewModels
 {
@@ -36,6 +38,12 @@ namespace DeskAppWPF.ViewModels
         public async Task SetPresetAsync(string preset)
         {
             await _deskService.SetPresetAsync(int.Parse(preset));
+        }
+
+        [RelayCommand]
+        public void Navigate(string destination)
+        {
+            WeakReferenceMessenger.Default.Send(new NavigationMessage(destination));
         }
     }
 }

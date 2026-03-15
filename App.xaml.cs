@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 using DeskAppWPF.Services;
@@ -26,8 +26,11 @@ namespace DeskAppWPF
             // IDeskService deskService = new DeskService(baseUrl: "http://192.168.1.x");
             // ICalendarService calendarService = new CalendarService(icsUrl: "...");
     
+            // ── 1.5 Build the Settings Service ─────────────────────────────────────
+            ISettingsService settingsService = new SettingsService();
+
             // ── 2. Build the shell ViewModel ─────────────────────────────────────
-            var mainVm = new MainWindowViewModel(deskService);
+            var mainVm = new MainWindowViewModel(deskService, settingsService);
     
             // ── 3. Build and show the window ─────────────────────────────────────
             var window = new MainWindow

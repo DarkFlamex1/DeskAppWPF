@@ -1,10 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DeskAppWPF.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Messaging;
+using DeskAppWPF.Messages;
 
 namespace DeskAppWPF.ViewModels
 {
@@ -16,15 +18,29 @@ namespace DeskAppWPF.ViewModels
     {
         // required services expected from app.xaml.cs
         private readonly IDeskService _deskService;
+        private readonly ISettingsService _settingsService;
 
         [ObservableProperty]
         private ObservableObject _currentPage;
 
-        public MainWindowViewModel(IDeskService deskService)
+        public MainWindowViewModel(IDeskService deskService, ISettingsService settingsService)
         {
             _deskService = deskService;
+            _settingsService = settingsService;
 
             _currentPage = new DeskControlViewModel(_deskService);
+
+            WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (recipient, message) =>
+            {
+                if (message.Value == "Settings")
+                {
+                    CurrentPage = new SettingsViewModel(_settingsService);
+                }
+                else if (message.Value == "DeskControl")
+                {
+                    CurrentPage = new DeskControlViewModel(_deskService);
+                }
+            });
         }
     }
 }

@@ -14,6 +14,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,20">
@@ -42,7 +44,17 @@
             <CheckBox Content="Run automation even when PC is locked" IsChecked="{Binding RunWhenPcLocked, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold"/>
         </StackPanel>
 
-        <Button Grid.Row="5" Content="Save Settings" Command="{Binding SaveCommand}" 
+        <StackPanel Grid.Row="5" Margin="0,0,0,20">
+            <TextBlock Text="Standing Preset (1-4):" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding StandingPreset, UpdateSourceTrigger=PropertyChanged}" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Margin="0,0,0,20">
+            <TextBlock Text="Polling Interval (Seconds):" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding PollingIntervalSeconds, UpdateSourceTrigger=PropertyChanged}" Padding="5"/>
+        </StackPanel>
+
+        <Button Grid.Row="7" Content="Save Settings" Command="{Binding SaveCommand}" 
                 HorizontalAlignment="Left" Padding="15,5" Background="#007ACC" Foreground="White" BorderBrush="Transparent"/>
     </Grid>
 </UserControl>

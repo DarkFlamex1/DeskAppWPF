@@ -59,9 +59,9 @@ namespace DeskAppWPF.Services
                     Console.WriteLine($"Error in automation loop: {ex}");
                 }
 
-                // Poll every 10 seconds - this can be adjusted as needed, but should be frequent enough to catch events in a timely manner without being too resource intensive.
-                // TODO: Implement this as a AppSettings option with a default of 10 seconds.
-                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+                var settings = _settingsService.Load();
+                var pollingInterval = settings.PollingIntervalSeconds > 0 ? settings.PollingIntervalSeconds : 60;
+                await Task.Delay(TimeSpan.FromSeconds(pollingInterval), stoppingToken);
             }
         }
 

@@ -12,8 +12,7 @@ namespace DeskAppWPF.Models
         public string DeskIpAddress { get; set; } = string.Empty;
         public int BufferZoneMinutes { get; set; } = 1;
         public bool RunWhenPcLocked { get; set; } = false;
-
-        // TODO: NOT IMPLEMENTED IN the UI or view models.
         public int StandingPreset { get; set; } = 1;
+        public int PollingIntervalSeconds { get; set; } = 60;
     }
 }

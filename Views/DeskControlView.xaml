@@ -40,6 +40,5 @@
             Command="{Binding SetPresetCommand}"
             CommandParameter="4"></Button>
         </StackPanel>
-
     </Grid>
 </UserControl>

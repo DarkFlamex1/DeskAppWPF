@@ -2,9 +2,30 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:DeskAppWPF"
-             StartupUri="Views/MainWindow.xaml"
-             ThemeMode="Light">
+             ThemeMode="Dark"
+             xmlns:vm="clr-namespace:DeskAppWPF.ViewModels"
+             xmlns:views="clr-namespace:DeskAppWPF.Views">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type vm:DeskControlViewModel}">
+                <views:DeskControlView />
+            </DataTemplate>
+
+            <!-- Sprint 2 — uncomment as each screen is built -->
+            <!--
+            <DataTemplate DataType="{x:Type vm:CalendarViewModel}">
+                <views:CalendarView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ConnectionViewModel}">
+                <views:ConnectionView />
+            </DataTemplate>
+            -->
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

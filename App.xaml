@@ -1,0 +1,10 @@
+﻿<Application x:Class="DeskAppWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DeskAppWPF"
+             StartupUri="MainWindow.xaml"
+             ThemeMode="Light">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

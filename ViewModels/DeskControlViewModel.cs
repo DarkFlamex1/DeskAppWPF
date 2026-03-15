@@ -33,9 +33,9 @@ namespace DeskAppWPF.ViewModels
         }
 
         [RelayCommand]
-        public async Task SetPresetAsync()
+        public async Task SetPresetAsync(string preset)
         {
-            await _deskService.SetPresetAsync(1);
+            await _deskService.SetPresetAsync(int.Parse(preset));
         }
     }
 }

@@ -21,6 +21,25 @@
         <Button 
             Content="Refresh"
             Command="{Binding LoadHeightCommand}"></Button>
-        <Label Grid.Column="1">Hello, world!</Label>
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+
+            <Button 
+            Content="1"
+            Command="{Binding SetPresetCommand}"
+            CommandParameter="1"></Button>
+        <Button 
+            Content="2"
+            Command="{Binding SetPresetCommand}"
+            CommandParameter="2"></Button>
+        <Button 
+            Content="3"
+            Command="{Binding SetPresetCommand}"
+            CommandParameter="3"></Button>
+        <Button 
+            Content="4"
+            Command="{Binding SetPresetCommand}"
+            CommandParameter="4"></Button>
+        </StackPanel>
+
     </Grid>
 </UserControl>

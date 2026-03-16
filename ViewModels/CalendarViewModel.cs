@@ -60,6 +60,7 @@ namespace DeskAppWPF.ViewModels
             var upcomingEvents = await _calendarService.GetUpcomingEventsAsync(icsUrl);
             var eventVms = upcomingEvents.Select(e => new CalendarEventViewModel(e)).ToList();
 
+            // run this on the WPF thread sync to prevent us from r/w Events and Days when they are being rendered
             App.Current.Dispatcher.Invoke(() =>
             {
                 Events.Clear();

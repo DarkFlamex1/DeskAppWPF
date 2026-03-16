@@ -52,7 +52,7 @@ namespace DeskAppWPF.Services
             {
                 try
                 {
-                    await PerformDeskCheckAsync();
+                    await PollAndApplyEventsAsync();
                 }
                 catch (Exception ex)
                 {
@@ -65,7 +65,7 @@ namespace DeskAppWPF.Services
             }
         }
 
-        private async Task PerformDeskCheckAsync()
+        private async Task PollAndApplyEventsAsync()
         {
             var settings = _settingsService.Load();
             
@@ -80,11 +80,15 @@ namespace DeskAppWPF.Services
             var now = DateTime.Now;
             var bufferTime = now.AddMinutes(settings.BufferZoneMinutes);
 
+            // we may only want to trigger in the buffer zone and not while the event is ongoing - TODO: Figure out if we ever want to trigger when it's ongoing. (Just assume we don't ever miss buffer zone).
             var upcomingEvent = events.FirstOrDefault(e => e.StartTime <= bufferTime && e.EndTime > now);
 
             if (upcomingEvent != null && upcomingEvent.Uid != _lastProcessedEventUid)
             {
+                // prevent multiple triggers for the same event by checking the UID
                 _lastProcessedEventUid = upcomingEvent.Uid;
+
+                // Apply the standing preset for this event as we are now before/within the buffer zone (x minutes before event start)
                 await _deskService.SetPresetAsync(settings.StandingPreset);
             }
         }

@@ -32,8 +32,6 @@ namespace DeskAppWPF.Services
 
                 var now = CalDateTime.Now;
                 var searchEnd = now.AddDays(7);
-                
-                // Ical.Net GetOccurrences takes DateTime directly in modern versions
                 var occurrences = calendar.GetOccurrences(now).TakeWhileBefore(searchEnd);
                 
                 return occurrences

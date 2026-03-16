@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DeskAppWPF.Models;
+using H.NotifyIcon.Core;
 using System;
 
 namespace DeskAppWPF.ViewModels
@@ -19,7 +20,7 @@ namespace DeskAppWPF.ViewModels
         private DateTime _endTime;
 
         [ObservableProperty]
-        private bool _isChecked = true;
+        private bool _isEnabled;
 
         public CalendarEventViewModel(UpcomingEvent upcomingEvent)
         {
@@ -27,13 +28,13 @@ namespace DeskAppWPF.ViewModels
             Title = upcomingEvent.Summary;
             StartTime = upcomingEvent.StartTime;
             EndTime = upcomingEvent.EndTime;
+            IsEnabled = true;
         }
 
         [RelayCommand]
         private void ToggleChecked()
         {
-            // Future feature: toggle desk raise setting when clicked
-            IsChecked = !IsChecked;
+            // this is not used currently. But when a property changes especially the _isEnabled -> we don't need this command probably?
         }
     }
 }

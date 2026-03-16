@@ -8,8 +8,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:CalendarEventViewModel}"
              d:DesignHeight="100" d:DesignWidth="400">
     <!-- Calendar Event Card -->
-    <Border Background="#2B2B2B" CornerRadius="8" Margin="0,0,0,10" Padding="15" 
-            BorderBrush="#107C10" BorderThickness="2,1,1,1">
+    <Border Background="#2B2B2B" CornerRadius="8" Margin="0,0,0,10" Padding="15">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -27,7 +26,7 @@
 
             <!-- Action Checkbox -->
             <CheckBox Grid.Column="1" 
-                      IsChecked="{Binding IsChecked}" 
+                      IsChecked="{Binding IsEnabled}" 
                       Command="{Binding ToggleCheckedCommand}"
                       VerticalAlignment="Bottom" 
                       HorizontalAlignment="Right">

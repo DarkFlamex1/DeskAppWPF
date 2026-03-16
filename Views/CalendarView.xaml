@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodels="clr-namespace:DeskAppWPF.ViewModels"
+             xmlns:views="clr-namespace:DeskAppWPF.Views"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodels:CalendarViewModel}"
              d:DesignHeight="800" d:DesignWidth="800">
@@ -38,59 +39,11 @@
                             
                             <!-- Day Layout (Hours on left starting after Date Label, lines extending right) -->
                             <Grid Margin="80,0,0,0">
-                                <!-- Hour Lines drawn manually with ItemsControl for the 24 hours -->
-                                <ItemsControl ItemsSource="{Binding Hours}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Height="60"> <!-- Each hour block is 60px high -->
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="60"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <!-- Hour text -->
-                                                <TextBlock Grid.Column="0" Text="{Binding}" Foreground="#666666" FontSize="12" 
-                                                           VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-8,10,0"/>
-                                                <!-- Faded line -->
-                                                <Border Grid.Column="1" BorderBrush="#303030" BorderThickness="0,1,0,0" VerticalAlignment="Top"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-
                                 <!-- Events List simply overlaid on the right, since it's hard to position events absolutely over specific hour heights purely in XAML without a custom Panel, we just list them out in front of the grid layout -->
                                 <ItemsControl ItemsSource="{Binding DayEvents}" Margin="60,30,10,0" VerticalAlignment="Top">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate DataType="{x:Type viewmodels:CalendarEventViewModel}">
-                                            <!-- Calendar Event Card -->
-                                            <Border Background="#2B2B2B" CornerRadius="8" Margin="0,0,0,10" Padding="15" 
-                                                    BorderBrush="#107C10" BorderThickness="2,1,1,1">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                        <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap"/>
-                                                        <TextBlock Foreground="#A0A0A0" FontSize="12" Margin="0,5,0,0">
-                                                            <Run Text="{Binding StartTime, StringFormat='{}{0:h:mm tt}'}" />
-                                                            <Run Text=" - " />
-                                                            <Run Text="{Binding EndTime, StringFormat='{}{0:h:mm tt}'}" />
-                                                        </TextBlock>
-                                                    </StackPanel>
-
-                                                    <!-- Action Checkbox -->
-                                                    <CheckBox Grid.Column="1" 
-                                                              IsChecked="{Binding IsChecked}" 
-                                                              Command="{Binding ToggleCheckedCommand}"
-                                                              VerticalAlignment="Bottom" 
-                                                              HorizontalAlignment="Right">
-                                                        <CheckBox.LayoutTransform>
-                                                            <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
-                                                        </CheckBox.LayoutTransform>
-                                                    </CheckBox>
-                                                </Grid>
-                                            </Border>
+                                            <views:CalendarEventView />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

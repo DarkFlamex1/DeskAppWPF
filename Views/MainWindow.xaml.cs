@@ -34,16 +34,14 @@ namespace DeskAppWPF
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Cancel the close and hide the window instead
+            // Cancel the close and hide the window instead - we live as a tray application
             e.Cancel = true;
             this.Hide();
         }
 
         private void MenuOpen_Click(object sender, RoutedEventArgs e)
         {
-            this.Show();
-            this.WindowState = WindowState.Normal;
-            this.Activate();
+            ShowMainWindow();
         }
 
         private void MenuExit_Click(object sender, RoutedEventArgs e)

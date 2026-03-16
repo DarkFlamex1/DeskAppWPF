@@ -12,7 +12,7 @@
         <tb:TaskbarIcon
             x:Name="TrayIcon"
             ToolTipText="Desk Automation App"
-            DoubleClickCommand="{Binding ShowWindowCommand, RelativeSource={RelativeSource AncestorType=Window}}">
+            DoubleClickCommand="{Binding ShowMainWindowCommand, RelativeSource={RelativeSource AncestorType=Window}}">
             <tb:TaskbarIcon.IconSource>
                 <tb:GeneratedIconSource
             Text="1"

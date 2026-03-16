@@ -19,8 +19,6 @@ namespace DeskAppWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public RelayCommand ShowWindowCommand { get; }
-
         public MainWindow()
         {
             InitializeComponent();

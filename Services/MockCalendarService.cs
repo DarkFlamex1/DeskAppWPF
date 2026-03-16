@@ -1,4 +1,4 @@
-﻿using DeskAppWPF.Models;
+using DeskAppWPF.Models;
 using Ical.Net.DataTypes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,11 @@ namespace DeskAppWPF.Services
         public MockCalendarService()
         {
             // allow for setting up of specific settings if needed for testing
+        }
+
+        public IEnumerable<UpcomingEvent>? GetCachedEvents()
+        {
+            return null;
         }
 
         public async Task<IEnumerable<UpcomingEvent>> GetUpcomingEventsAsync(string icsUrl)

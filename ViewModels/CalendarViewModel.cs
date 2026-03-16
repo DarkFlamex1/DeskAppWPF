@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DeskAppWPF.Services;
+using DeskAppWPF.Models;
 
 namespace DeskAppWPF.ViewModels
 {
@@ -57,7 +58,18 @@ namespace DeskAppWPF.ViewModels
                 return;
             }
 
+            var cachedEvents = _calendarService.GetCachedEvents();
+            if (cachedEvents != null)
+            {
+                UpdateEventsUI(cachedEvents);
+            }
+
             var upcomingEvents = await _calendarService.GetUpcomingEventsAsync(icsUrl);
+            UpdateEventsUI(upcomingEvents);
+        }
+
+        private void UpdateEventsUI(IEnumerable<UpcomingEvent> upcomingEvents)
+        {
             var eventVms = upcomingEvents.Select(e => new CalendarEventViewModel(e)).ToList();
 
             // run this on the WPF thread sync to prevent us from r/w Events and Days when they are being rendered

@@ -9,6 +9,7 @@ namespace DeskAppWPF.Services
 {
     internal interface ICalendarService
     {
+        IEnumerable<UpcomingEvent>? GetCachedEvents();
         Task<IEnumerable<UpcomingEvent>> GetUpcomingEventsAsync(string icsUrl);
     }
 }

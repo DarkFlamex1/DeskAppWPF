@@ -12,10 +12,16 @@ namespace DeskAppWPF.Services
     internal class CalendarService : ICalendarService
     {
         private readonly HttpClient _httpClient;
+        private IEnumerable<UpcomingEvent>? _cachedEvents;
 
         public CalendarService()
         {
             _httpClient = new HttpClient();
+        }
+
+        public IEnumerable<UpcomingEvent>? GetCachedEvents()
+        {
+            return _cachedEvents;
         }
 
         public async Task<IEnumerable<UpcomingEvent>> GetUpcomingEventsAsync(string icsUrl)
@@ -34,7 +40,7 @@ namespace DeskAppWPF.Services
                 var searchEnd = now.AddDays(7);
                 var occurrences = calendar.GetOccurrences(now).TakeWhileBefore(searchEnd);
                 
-                return occurrences
+                var events = occurrences
                     .Where(o => o.Source is Ical.Net.CalendarComponents.CalendarEvent)
                     .Select(o => {
                         var evt = (Ical.Net.CalendarComponents.CalendarEvent)o.Source;
@@ -48,6 +54,9 @@ namespace DeskAppWPF.Services
                     })
                     .OrderBy(e => e.StartTime)
                     .ToList();
+
+                _cachedEvents = events;
+                return events;
             }
             catch (Exception ex)
             {

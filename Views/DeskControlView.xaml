@@ -22,10 +22,7 @@
 
             <!-- Top Left: Connection Status -->
             <StackPanel Grid.Row="0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
-                    <Ellipse Width="12" Height="12" Fill="#107C10" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                    <TextBlock Text="Connected" FontWeight="SemiBold" Foreground="#888888" VerticalAlignment="Center" FontSize="14"/>
-                </StackPanel>
+                <local:ConnectionView DataContext="{Binding ConnectionViewModel}" />
             </StackPanel>
 
             <!-- Content -->

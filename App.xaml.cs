@@ -27,6 +27,7 @@ namespace DeskAppWPF
                     
                     // ViewModels
                     services.AddTransient<MainWindowViewModel>();
+                    services.AddSingleton<ConnectionViewModel>();
                     
                     // Views
                     services.AddTransient<MainWindow>(provider => new MainWindow

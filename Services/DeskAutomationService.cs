@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Win32;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace DeskAppWPF.Services
 {
@@ -68,6 +69,10 @@ namespace DeskAppWPF.Services
         private async Task PollAndApplyEventsAsync()
         {
             var settings = _settingsService.Load();
+
+            // Ping desk connection and notify anyone who needs to know about it - possible tech debt to move into service
+            var isConnected = await _deskService.GetConnectionStatusAsync();
+            WeakReferenceMessenger.Default.Send(new Messages.ConnectionStatusMessage(isConnected));
             
             if (_isPcLocked && !settings.RunWhenPcLocked)
             {

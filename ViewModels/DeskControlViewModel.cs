@@ -33,11 +33,15 @@ namespace DeskAppWPF.ViewModels
         [ObservableProperty]
         private CalendarViewModel _calendarViewModel;
 
+        [ObservableProperty]
+        private ConnectionViewModel _connectionViewModel;
+
         public DeskControlViewModel(IDeskService deskService, ICalendarService calendarService, ISettingsService settingsService)
         {
             _deskService = deskService;
             
             CalendarViewModel = new CalendarViewModel(calendarService, settingsService);
+            ConnectionViewModel = new ConnectionViewModel(deskService);
 
             // Fetch height...
             _ = LoadHeightAsync();

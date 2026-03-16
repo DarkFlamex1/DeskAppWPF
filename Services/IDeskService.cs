@@ -10,5 +10,7 @@ namespace DeskAppWPF.Services
     {
         public Task<float> GetHeightAsync();
         public Task<bool> SetPresetAsync(int preset);
+        public bool GetCachedConnectionStatus();
+        public Task<bool> GetConnectionStatusAsync();
     }
 }

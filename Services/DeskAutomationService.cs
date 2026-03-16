@@ -86,7 +86,7 @@ namespace DeskAppWPF.Services
             var bufferTime = now.AddMinutes(settings.BufferZoneMinutes);
 
             // we may only want to trigger in the buffer zone and not while the event is ongoing - TODO: Figure out if we ever want to trigger when it's ongoing. (Just assume we don't ever miss buffer zone).
-            var upcomingEvent = events.FirstOrDefault(e => e.StartTime <= bufferTime && e.EndTime > now);
+            var upcomingEvent = events.FirstOrDefault(e => e.StartTime <= bufferTime && e.EndTime > now && !settings.IgnoredEventUids.Contains(e.Uid));
 
             if (upcomingEvent != null && upcomingEvent.Uid != _lastProcessedEventUid)
             {

@@ -70,7 +70,7 @@ namespace DeskAppWPF.ViewModels
 
         private void UpdateEventsUI(IEnumerable<UpcomingEvent> upcomingEvents)
         {
-            var eventVms = upcomingEvents.Select(e => new CalendarEventViewModel(e)).ToList();
+            var eventVms = upcomingEvents.Select(e => new CalendarEventViewModel(e, _settingsService)).ToList();
 
             // run this on the WPF thread sync to prevent us from r/w Events and Days when they are being rendered
             App.Current.Dispatcher.Invoke(() =>

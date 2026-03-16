@@ -14,5 +14,6 @@ namespace DeskAppWPF.Models
         public bool RunWhenPcLocked { get; set; } = false;
         public int StandingPreset { get; set; } = 1;
         public int PollingIntervalSeconds { get; set; } = 60;
+        public List<string> IgnoredEventUids { get; set; } = new List<string>();
     }
 }

@@ -6,8 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using DeskAppWPF.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using DeskAppWPF.Messages;
+using DeskAppWPF.Models;
+using System.Windows;
 
 namespace DeskAppWPF.ViewModels
 {
@@ -23,9 +27,20 @@ namespace DeskAppWPF.ViewModels
         [ObservableProperty]
         private float _currentHeight = 5f;
 
-        public DeskControlViewModel(IDeskService deskService)
+        [ObservableProperty]
+        private UpcomingEvent _nextEvent;
+        
+        [ObservableProperty]
+        private CalendarViewModel _calendarViewModel;
+
+        public DeskControlViewModel(IDeskService deskService, ICalendarService calendarService, ISettingsService settingsService)
         {
             _deskService = deskService;
+            
+            CalendarViewModel = new CalendarViewModel(calendarService, settingsService);
+
+            // Fetch height...
+            _ = LoadHeightAsync();
         }
 
         [RelayCommand]

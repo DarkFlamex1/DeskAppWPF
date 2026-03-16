@@ -24,12 +24,12 @@ namespace DeskAppWPF.ViewModels
         [ObservableProperty]
         private ObservableObject _currentPage;
 
-        public MainWindowViewModel(IDeskService deskService, ISettingsService settingsService)
+        public MainWindowViewModel(IDeskService deskService, ISettingsService settingsService, ICalendarService calendarService)
         {
             _deskService = deskService;
             _settingsService = settingsService;
 
-            _currentPage = new DeskControlViewModel(_deskService);
+            _currentPage = new DeskControlViewModel(_deskService, calendarService, settingsService);
 
             WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (recipient, message) =>
             {
@@ -39,7 +39,7 @@ namespace DeskAppWPF.ViewModels
                 }
                 else if (message.Value == "DeskControl")
                 {
-                    CurrentPage = new DeskControlViewModel(_deskService);
+                    CurrentPage = new DeskControlViewModel(_deskService, calendarService, settingsService);
                 }
             });
         }

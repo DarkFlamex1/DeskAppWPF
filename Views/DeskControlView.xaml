@@ -79,17 +79,8 @@
                 <TextBlock FontFamily="Segoe Fluent Icons" Text="&#xE713;" FontSize="20" Foreground="#888888"/>
             </Button>
 
-            <!-- Upcoming Event -->
-            <GroupBox Header="Upcoming Event" Margin="10" Grid.Row="1">
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="{Binding NextEvent.Subject}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap"/>
-                    <TextBlock Text="{Binding NextEvent.StartTime, StringFormat='{}{0:f}'}" Foreground="Gray"/>
-                    <Button Content="View 5-Day Schedule" 
-                            Command="{Binding NavigateCommand}" 
-                            CommandParameter="Calendar"
-                            Margin="0,15,0,0" HorizontalAlignment="Left" Padding="10,5"/>
-                </StackPanel>
-            </GroupBox>
+            <!-- Upcoming Event / Calendar View -->
+            <ContentControl Content="{Binding CalendarViewModel}" Grid.Row="1" Margin="10"/>
         </Grid>
     </Grid>
 </UserControl>
